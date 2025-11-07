@@ -4,7 +4,7 @@
 #include "ABQ.hpp"
 #include "ABS.hpp"
 #include "Interfaces.hpp"
-//#include "LinkedList.hpp"
+#include "LinkedList.hpp"
 //#include "LLDQ.hpp"
 //#include "LLQ.hpp"
 //#include "LLS.hpp"
@@ -19,10 +19,18 @@
 */
 
 int main() {
-    ABQ<int> a;
-
-    std::cout << a.dequeue() << std::endl;
+    LinkedList<int> a;
+    for (int i = 0; i < 10; i++) {
+        a.addTail(i);
+    }
+    a.printForward();
+    LinkedList<int> b(a);
+    LinkedList<int> c = std::move(a);
+    LinkedList<int> d(std::move(b));
+    d.printReverse();
     
+    
+    //d.clear();
     return 0;
 }
 
