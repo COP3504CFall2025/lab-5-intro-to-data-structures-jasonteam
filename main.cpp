@@ -1,13 +1,13 @@
-#ifdef MAIN
+//#ifdef MAIN
 
-#include "ABDQ.hpp"
+//#include "ABDQ.hpp"
 #include "ABQ.hpp"
 #include "ABS.hpp"
 #include "Interfaces.hpp"
-#include "LinkedList.hpp"
-#include "LLDQ.hpp"
-#include "LLQ.hpp"
-#include "LLS.hpp"
+//#include "LinkedList.hpp"
+//#include "LLDQ.hpp"
+//#include "LLQ.hpp"
+//#include "LLS.hpp"
 #include <iostream>
 
 /*
@@ -19,10 +19,20 @@
 */
 
 int main() {
+    ABQ<int> a;
 
+    for (int i = 0; i < 25; i++) {
+        a.enqueue(i);
+    }
 
+    std::cout << a.peek() << std::endl;
+
+    for (int i = 0; i < 25; i++) {
+        std::cout << a.dequeue() << std::endl;
+    }
+    
     return 0;
 }
 
 
-#endif
+//#endif

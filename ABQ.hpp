@@ -23,20 +23,114 @@ public:
     ABQ& operator=(const ABQ& rhs);
     ABQ(ABQ&& other) noexcept;
     ABQ& operator=(ABQ&& rhs) noexcept;
-    ~ABQ() noexcept override;
+    ~ABQ() noexcept;
 
     // Getters
-    [[nodiscard]] size_t getSize() const noexcept override;
+    [[nodiscard]] size_t getSize() const noexcept;
     [[nodiscard]] size_t getMaxCapacity() const noexcept;
     [[nodiscard]] T* getData() const noexcept;
 
     // Insertion
-    void enqueue(const T& data) override;
+    void enqueue(const T& data);
 
     // Access
-    T peek() const override;
+    T peek() const;
 
     // Deletion
-    T dequeue() override;
+    T dequeue();
 
+private:
 };
+
+template <typename T>
+ABQ<T>::ABQ() {
+    capacity_ = 1;
+    curr_size_ = 0;
+    array_ = new T[1];
+}
+
+template <typename T>
+ABQ<T>::~ABQ() noexcept {
+    delete[] array_;
+    array_ = nullptr;
+}
+
+template <typename T>
+ABQ<T>::ABQ(const ABQ& other) {                         // Copy Constructor
+    this->capacity_ = other.capacity_;
+    this->curr_size_ = other.curr_size_;
+    for (size_t i = 0; i < this->capacity; i++) {
+        this->array_[i] = other.array_[i];
+    }
+}
+
+template <typename T>
+ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {                         // Copy Assignment Operator
+    this->capacity_ = other.capacity_;
+    this->curr_size_ = other.curr_size_;
+    for (size_t i = 0; i < this->capacity; i++) {
+        this->array_[i] = other.array_[i];
+    }
+}
+
+template <typename T>
+ABQ<T>::ABQ(ABQ&& other) noexcept {                                          // Move Constructor
+    this->capacity_ = other.capacity_;
+    this->curr_size_ = other.curr_size_;
+    this->array_ = std::move(other.array_);
+    
+}
+
+
+template <typename T>
+ABQ<T>::ABQ(const std::size_t capacity) {
+    capacity_ = capacity;
+    curr_size_ = 0;
+    array_ = new T[capacity_];
+}
+
+template <typename T>
+void ABQ<T>::enqueue(const T& e) {
+    if (curr_size_ >= capacity_) {
+        T* tempArray = new T[capacity_ * scale_factor_];
+        for (size_t i = 0; i < capacity_; i++) {
+            tempArray[i] = array_[i];
+        }
+        delete[] array_;                            // Delete old data
+        array_ = std::move(tempArray);
+        capacity_ *= 2;
+    }
+    array_[curr_size_] = e;
+    curr_size_++;
+}
+
+template <typename T>
+T ABQ<T>::dequeue() {
+    T temp = array_[0];                             // Front Index
+    
+    // Must shift everything now
+    for (size_t i = 1; i < curr_size_; i++) {
+        array_[i - 1] = array_[i];                   // Swap
+    }
+
+    return temp;                                    // Return the dequeued value
+}
+
+template <typename T>
+T ABQ<T>::peek() const {
+    return array_[0];
+}
+
+template <typename T>
+size_t ABQ<T>::getSize() const noexcept {
+    return curr_size_;
+}
+template <typename T>
+size_t ABQ<T>::getMaxCapacity() const noexcept {
+    return capacity_;
+}
+
+template <typename T>
+T* ABQ<T>::getData() const noexcept {
+    return curr_size_;
+}
