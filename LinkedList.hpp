@@ -31,7 +31,7 @@ public:
 	// Removal
 	bool removeHead();
 	bool removeTail();
-	void Clear();
+	void clear();
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
@@ -62,7 +62,7 @@ LinkedList<T>::~LinkedList() {
 		count = 0;
 		Node* curr = head;
 		while (curr && curr->next) {			// While the next pointer in the current node isn't null
-												// Also make sure the curr ptr isnt null if the LL was already Cleared
+												// Also make sure the curr ptr isnt null if the LL was already cleared
 			curr = curr->next;					// Set current pointer to the next node
 			delete curr->prev;					// Delete the previous node of this node (i.e the og node)
 		}
@@ -202,7 +202,7 @@ bool LinkedList<T>::removeTail() {
 }
 
 template <typename T>
-void LinkedList<T>::Clear() {
+void LinkedList<T>::clear() {
 	while (count > 0) {					// While head and tail pointer are real
 		removeHead();						// Delete the head until nothing is left.
 		count--;
