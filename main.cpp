@@ -20,7 +20,7 @@
 
 int main() {
     LinkedList<int> a;
-
+    std::cout << a.getHead() << std::endl;
     return 0;
 }
 

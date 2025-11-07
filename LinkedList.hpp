@@ -54,6 +54,8 @@ private:
 template <typename T>
 LinkedList<T>::LinkedList() {
 	count = 0;
+	head = nullptr;
+	tail = nullptr;
 }
 
 template <typename T>
