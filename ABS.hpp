@@ -84,7 +84,6 @@ ABS<T>::ABS(const ABS& other) {
 // Copy Assignment Operator
 template <typename T>
 ABS<T>& ABS<T>::operator=(const ABS& rhs) {
-    std::cout << "copy assignment op called" <<std::endl;
     this->capacity_ = rhs.capacity_;
     this->curr_size_ = rhs.curr_size_;
     this->array_ = new T[capacity_];
@@ -99,7 +98,6 @@ ABS<T>& ABS<T>::operator=(const ABS& rhs) {
 // Move Constructor
 template <typename T>
 ABS<T>::ABS(ABS&& other) noexcept {
-    std::cout << "move constructor called" << std::endl;
     this->capacity_ = other.capacity_;
     this->curr_size_ = other.curr_size_;
 
@@ -119,7 +117,6 @@ ABS<T>::ABS(ABS&& other) noexcept {
 // Move Assignment Operator
 template <typename T>
 ABS<T>& ABS<T>::operator=(ABS&& other) noexcept {
-    std::cout << "move op called" <<std::endl;
     if (this == &other) {
         return *this;
     }
@@ -167,12 +164,18 @@ void ABS<T>::push(const T& data) {
 
 template <typename T>
 T ABS<T>::pop() {                               // totally removing an element here
+    if (curr_size_ <= 0) {
+        throw std::runtime_error("");
+    }
     curr_size_--;
     return array_[curr_size_];
 }
 
 template <typename T>
 T ABS<T>::peek() const {
+    if (curr_size_ <= 0) {
+        throw std::runtime_error("");
+    }
     return array_[curr_size_ - 1];
 }
 

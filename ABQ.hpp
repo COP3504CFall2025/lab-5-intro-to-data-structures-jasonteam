@@ -75,7 +75,6 @@ ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {                         // Copy Assi
 
 template <typename T>
 ABQ<T>::ABQ(ABQ&& other) noexcept {
-    std::cout << "move constructor called" << std::endl;
     this->capacity_ = other.capacity_;
     this->curr_size_ = other.curr_size_;
 
@@ -95,7 +94,6 @@ ABQ<T>::ABQ(ABQ&& other) noexcept {
 // Move Assignment Operator
 template <typename T>
 ABQ<T>& ABQ<T>::operator=(ABQ&& other) noexcept {
-    std::cout << "move op called" <<std::endl;
     if (this == &other) {
         return *this;
     }
