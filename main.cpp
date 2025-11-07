@@ -21,13 +21,13 @@
 int main() {
     LinkedList<int> a;
     for (int i = 0; i < 10; i++) {
-        a.addTail(i);
+        a.AddTail(i);
     }
-    a.printForward();
+    a.PrintForward();
     LinkedList<int> b(a);
     LinkedList<int> c = std::move(a);
     LinkedList<int> d(std::move(b));
-    d.printReverse();
+    d.PrintReverse();
     
     
     //d.clear();
