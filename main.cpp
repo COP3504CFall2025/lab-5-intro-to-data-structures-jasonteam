@@ -20,7 +20,35 @@
 
 int main() {
     LinkedList<int> a;
-    std::cout << a.getHead() << std::endl;
+    
+    for (int i = 0; i < 100; i++) {
+        a.addHead(i);
+        a.addTail(i);
+    }
+    LinkedList<int> b(a);
+    LinkedList<int> c = b;
+    LinkedList<int> d(c);
+    LinkedList<int> e(d);
+    LinkedList<int> f(std::move(d));
+    LinkedList<int> g = std::move(e);
+    a.printForward();
+    a.clear();
+    a.removeHead();
+    a.removeTail();
+    a.printForward();
+    a.clear();
+    b.printForward();
+    b.clear();
+    c.printForward();
+    c.clear();
+    d.printForward();
+    d.clear();
+    e.printForward();
+    e.clear();
+    f.printForward();
+    f.clear();
+    g.printForward();
+    g.clear();
     return 0;
 }
 
