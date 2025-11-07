@@ -106,6 +106,9 @@ void ABQ<T>::enqueue(const T& e) {
 
 template <typename T>
 T ABQ<T>::dequeue() {
+    if (curr_size_ == 0) {
+        throw std::runtime_error("");
+    }
     T temp = array_[0];                             // Front Index
     
     // Must shift everything now
@@ -118,6 +121,9 @@ T ABQ<T>::dequeue() {
 
 template <typename T>
 T ABQ<T>::peek() const {
+    if (curr_size_ == 0) {
+        throw std::runtime_error("");
+    }
     return array_[0];
 }
 

@@ -21,15 +21,7 @@
 int main() {
     ABQ<int> a;
 
-    for (int i = 0; i < 25; i++) {
-        a.enqueue(i);
-    }
-
-    std::cout << a.peek() << std::endl;
-
-    for (int i = 0; i < 25; i++) {
-        std::cout << a.dequeue() << std::endl;
-    }
+    std::cout << a.dequeue() << std::endl;
     
     return 0;
 }
