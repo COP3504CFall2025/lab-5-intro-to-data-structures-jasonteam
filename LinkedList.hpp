@@ -178,6 +178,7 @@ bool LinkedList<T>::removeHead() {
 	} else {
 		Node* tmpPtr = head;				// Store address of current head
 		head = head->next;					// Set new head to next Node of head
+		head->prev = nullptr;				// Set previous pointer to nullptr
 		delete tmpPtr;						// Delete the previous head
 	}
 	count--;
@@ -195,6 +196,7 @@ bool LinkedList<T>::removeTail() {
 	} else {
 		Node* tmpPtr = tail;				// Store address of current tail
 		tail = tail->prev;					// Set new tail to previous Node of tail
+		tail->next = nullptr;				// Set next pointer to nullptr
 		delete tmpPtr;						// Delete the previous tail
 	}
 	count--;
