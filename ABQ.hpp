@@ -74,12 +74,51 @@ ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {                         // Copy Assi
 }
 
 template <typename T>
-ABQ<T>::ABQ(ABQ&& other) noexcept {                                          // Move Constructor
+ABQ<T>::ABQ(ABQ&& other) noexcept {
+    std::cout << "move constructor called" << std::endl;
     this->capacity_ = other.capacity_;
     this->curr_size_ = other.curr_size_;
-    this->array_ = std::move(other.array_);
+
+    delete[] this->array_;
+    this->array_ = new T[capacity_];
     
+    for (size_t i = 0; i < this->curr_size_; i++) {   // Deep copy
+        this->array_[i] = other.array_[i];
+    }
+
+    other.capacity_ = 0;
+    other.curr_size_ = 0;
+    delete[] other.array_;
+    other.array_ = nullptr;
 }
+
+// Move Assignment Operator
+template <typename T>
+ABQ<T>& ABQ<T>::operator=(ABQ&& other) noexcept {
+    std::cout << "move op called" <<std::endl;
+    if (this == &other) {
+        return *this;
+    }
+
+    this->capacity_ = other.capacity_;
+    this->curr_size_ = other.curr_size_;
+
+    delete[] this->array_;
+    this->array_ = new T[capacity_];
+    
+    for (size_t i = 0; i < this->curr_size_; i++) {   // Deep copy
+        this->array_[i] = other.array_[i];
+    }
+
+    other.capacity_ = 0;
+    other.curr_size_ = 0;
+    delete[] other.array_;
+    other.array_ = nullptr;
+
+    return *this;
+}
+
+
 
 
 template <typename T>
