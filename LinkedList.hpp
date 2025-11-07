@@ -15,7 +15,7 @@ public:
 
 	// Behaviors
 	void printForward() const;
-	void PrintReverse() const;
+	void printReverse() const;
 
 	// Accessors
 	[[nodiscard]] unsigned int getCount() const { return count; }
@@ -25,12 +25,12 @@ public:
 	const Node* getTail() const { return tail; }
 
 	// Insertion
-	void AddHead(const T& data);
-	void AddTail(const T& data);
+	void addHead(const T& data);
+	void addTail(const T& data);
 
 	// Removal
-	bool RemoveHead();
-	bool RemoveTail();
+	bool removeHead();
+	bool removeTail();
 	void Clear();
 
 	// Operators
@@ -58,16 +58,18 @@ LinkedList<T>::LinkedList() {
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
-	count = 0;
-	Node* curr = head;
-	while (curr && curr->next) {			// While the next pointer in the current node isn't null
-											// Also make sure the curr ptr isnt null if the LL was already Cleared
-		curr = curr->next;					// Set current pointer to the next node
-		delete curr->prev;					// Delete the previous node of this node (i.e the og node)
+	if (count > 0) {							// Ensure that theres actually data in the LL
+		count = 0;
+		Node* curr = head;
+		while (curr && curr->next) {			// While the next pointer in the current node isn't null
+												// Also make sure the curr ptr isnt null if the LL was already Cleared
+			curr = curr->next;					// Set current pointer to the next node
+			delete curr->prev;					// Delete the previous node of this node (i.e the og node)
+		}
+		delete curr;							// Delete the current pointer, should be the last one
+		head = nullptr;							// Set head and tail pointers to nullptr
+		tail = nullptr;							// No dangling pointers pls
 	}
-	delete curr;							// Delete the current pointer, should be the last one
-	head = nullptr;							// Set head and tail pointers to nullptr
-	tail = nullptr;							// No dangling pointers pls
 }
 
 // Copy Constructor
@@ -76,7 +78,7 @@ LinkedList<T>::LinkedList(const LinkedList<T>& other) {
 	this->count = 0;				// Set count to 0
 	Node* curr = other.head;				// Current node pointer for the other object
 	while (curr) {
-		this->AddTail(curr->data);			// Use AddTail to add nodes to THIS LL
+		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
 		curr = curr->next;					// Also will create the head and tail automatically :D
 	}
 }
@@ -90,7 +92,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 	this->count = 0;				// Set count to 0
 	Node* curr = rhs.head;				// Current node pointer for the other object
 	while (curr) {
-		this->AddTail(curr->data);			// Use AddTail to add nodes to THIS LL
+		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
 		curr = curr->next;					// Also will create the head and tail automatically :D
 	}
 	return *this;
@@ -102,9 +104,9 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept {
 	this->count = 0;				// Set count to 0
 	Node* curr = other.head;				// Current node pointer for the other object
 	while (curr) {
-		this->AddTail(curr->data);			// Use AddTail to add nodes to THIS LL
+		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
 		curr = curr->next;					// Also will create the head and tail automatically :D
-		other.RemoveHead();					// Delete the last node from other
+		other.removeHead();					// Delete the last node from other
 	}
 	other.count = 0;
 	other.head = nullptr;
@@ -120,9 +122,9 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
 	this->count = 0;				// Set count to 0
 	Node* curr = rhs.head;				// Current node pointer for the other object
 	while (curr) {
-		this->AddTail(curr->data);			// Use AddTail to add nodes to THIS LL
+		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
 		curr = curr->next;					// Also will create the head and tail automatically :D
-		rhs.RemoveHead();					// Delete the last node from other
+		rhs.removeHead();					// Delete the last node from other
 	}
 	rhs.count = 0;
 	rhs.head = nullptr;
@@ -132,7 +134,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
 }
 
 template <typename T>
-void LinkedList<T>::AddHead(const T& data){
+void LinkedList<T>::addHead(const T& data){
 	if (count == 0) {						// If no nodes in LinkedList
 		head = new Node();					// Create new node
 		tail = head;						// Set tail to head because only one node
@@ -149,7 +151,7 @@ void LinkedList<T>::AddHead(const T& data){
 }
 
 template <typename T>
-void LinkedList<T>::AddTail(const T& data) {
+void LinkedList<T>::addTail(const T& data) {
 	if (count == 0) {						// If no nodes in LinkedList
 		tail = new Node();					// Create new node
 		head = tail;						// Set tail to head because only one node
@@ -166,7 +168,7 @@ void LinkedList<T>::AddTail(const T& data) {
 }
 
 template <typename T>
-bool LinkedList<T>::RemoveHead() {
+bool LinkedList<T>::removeHead() {
 	if (count == 0) {
 		return false;						// If nothing in the LL
 	} else if (count == 1) {
@@ -183,7 +185,7 @@ bool LinkedList<T>::RemoveHead() {
 }
 
 template <typename T>
-bool LinkedList<T>::RemoveTail() {
+bool LinkedList<T>::removeTail() {
 	if (count == 0) {
 		return false;						// If nothing in the LL
 	} else if (count == 1) {
@@ -202,7 +204,7 @@ bool LinkedList<T>::RemoveTail() {
 template <typename T>
 void LinkedList<T>::Clear() {
 	while (count > 0) {					// While head and tail pointer are real
-		RemoveHead();						// Delete the head until nothing is left.
+		removeHead();						// Delete the head until nothing is left.
 		count--;
 	}
 }
@@ -217,7 +219,7 @@ void LinkedList<T>::printForward() const {
 }
 
 template <typename T>
-void LinkedList<T>::PrintReverse() const {
+void LinkedList<T>::printReverse() const {
 	Node* curr = tail;
 	while (curr) {
 		std::cout << curr->data << " ";
