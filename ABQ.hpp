@@ -152,7 +152,7 @@ T ABQ<T>::dequeue() {
     for (size_t i = 1; i < curr_size_; i++) {
         array_[i - 1] = array_[i];                   // Swap
     }
-
+    curr_size_--;
     return temp;                                    // Return the dequeued value
 }
 
@@ -175,5 +175,5 @@ size_t ABQ<T>::getMaxCapacity() const noexcept {
 
 template <typename T>
 T* ABQ<T>::getData() const noexcept {
-    return curr_size_;
+    return array_;
 }
