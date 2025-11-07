@@ -167,6 +167,18 @@ T ABS<T>::pop() {                               // totally removing an element h
     if (curr_size_ <= 0) {
         throw std::runtime_error("");
     }
+
+    if (curr_size_ <= (capacity_ / scale_factor_) && (capacity_ % scale_factor_) == 0) {              // If the capacity needs to be scaled
+        T* tempArray_ = new T[capacity_ / scale_factor_];
+        for (size_t i = 0; i < capacity_; i++) {   // Copy array elements to tempArray
+            tempArray_[i] = array_[i];
+        }
+        delete[] array_;
+        array_ = std::move(tempArray_);         // Move ownership of tempArray data to array
+        tempArray_ = nullptr;                   // No dangling pointer pls
+        capacity_ /= 2;                         // Make sure to change the capacity to the new capacity
+    }
+
     curr_size_--;
     return array_[curr_size_];
 }

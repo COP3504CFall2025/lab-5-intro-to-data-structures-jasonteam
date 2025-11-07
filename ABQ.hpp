@@ -135,7 +135,7 @@ void ABQ<T>::enqueue(const T& e) {
         }
         delete[] array_;                            // Delete old data
         array_ = std::move(tempArray);
-        capacity_ *= 2;
+        capacity_ *= scale_factor_;
     }
     array_[curr_size_] = e;
     curr_size_++;
@@ -146,6 +146,17 @@ T ABQ<T>::dequeue() {
     if (curr_size_ == 0) {
         throw std::runtime_error("");
     }
+
+    if (curr_size_ <= (capacity_ / scale_factor_) && (capacity_ % scale_factor_) == 0) {
+        T* tempArray = new T[capacity_ / scale_factor_];
+        for (size_t i = 0; i < capacity_; i++) {
+            tempArray[i] = array_[i];
+        }
+        delete[] array_;                            // Delete old data
+        array_ = std::move(tempArray);
+        capacity_ /= scale_factor_;
+    }
+
     T temp = array_[0];                             // Front Index
     
     // Must shift everything now
