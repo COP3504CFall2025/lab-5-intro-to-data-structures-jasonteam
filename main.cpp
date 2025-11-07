@@ -23,7 +23,7 @@ int main() {
     for (int i = 0; i < 10; i++) {
         a.AddTail(i);
     }
-    a.PrintForward();
+    a.printForward();
     LinkedList<int> b(a);
     LinkedList<int> c = std::move(a);
     LinkedList<int> d(std::move(b));

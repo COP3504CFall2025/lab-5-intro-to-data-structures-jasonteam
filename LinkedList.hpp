@@ -14,7 +14,7 @@ class LinkedList {
 public:
 
 	// Behaviors
-	void PrintForward() const;
+	void printForward() const;
 	void PrintReverse() const;
 
 	// Accessors
@@ -208,7 +208,7 @@ void LinkedList<T>::Clear() {
 }
 
 template <typename T>
-void LinkedList<T>::PrintForward() const {
+void LinkedList<T>::printForward() const {
 	Node* curr = head;
 	while (curr) {
 		std::cout << curr->data << " ";
