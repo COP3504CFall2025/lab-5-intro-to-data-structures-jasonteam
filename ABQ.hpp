@@ -66,10 +66,10 @@ ABQ<T>::ABQ(const ABQ& other) {                         // Copy Constructor
 
 template <typename T>
 ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {                         // Copy Assignment Operator
-    this->capacity_ = other.capacity_;
-    this->curr_size_ = other.curr_size_;
+    this->capacity_ = rhs.capacity_;
+    this->curr_size_ = rhs.curr_size_;
     for (size_t i = 0; i < this->capacity; i++) {
-        this->array_[i] = other.array_[i];
+        this->array_[i] = rhs.array_[i];
     }
 }
 
