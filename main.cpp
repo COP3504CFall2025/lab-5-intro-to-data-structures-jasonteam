@@ -21,9 +21,8 @@
 int main() {
     LinkedList<int> a;
     
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 99; i++) {
         a.addHead(i);
-        a.addTail(i);
     }
 
     return 0;
