@@ -130,6 +130,8 @@ void LinkedList<T>::addHead(const T& data){
 		head = new Node();					// Create new node
 		tail = head;						// Set tail to head because only one node
 		head->data = data;					// Give node data
+		head->next = nullptr;
+		head->prev = nullptr;
 		// Node head and tail pointer are null because nothing to point
 	} else {
 		Node* tempPtr = new Node();			// Create new node
@@ -147,6 +149,8 @@ void LinkedList<T>::addTail(const T& data) {
 		tail = new Node();					// Create new node
 		head = tail;						// Set tail to head because only one node
 		tail->data = data;					// Give node data
+		tail->next = nullptr;
+		tail->prev = nullptr;
 		// Node head and tail pointer are null because nothing to point
 	} else {
 		Node* tempPtr = new Node();			// Create new node
