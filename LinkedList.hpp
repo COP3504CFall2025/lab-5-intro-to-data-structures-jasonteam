@@ -61,6 +61,8 @@ LinkedList<T>::LinkedList() {
 template <typename T>
 LinkedList<T>::~LinkedList() {
 	this->clear();
+	head = nullptr;
+	tail = nullptr;
 }
 
 // Copy Constructor
@@ -201,11 +203,10 @@ bool LinkedList<T>::removeTail() {
 template <typename T>
 void LinkedList<T>::clear() {
 	while (head || tail) {					// While head and tail pointer are real
-		removeHead();						// Delete the head until nothing is left.
-		removeTail();						// Delete the tail until nothing is left.
 		std::cout << "current count : " << count << std::endl;
 		printForward();
 		std::cout << std::endl;
+		removeHead();						// Delete the head until nothing is left.
 	}
 }
 
