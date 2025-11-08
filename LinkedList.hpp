@@ -60,18 +60,7 @@ LinkedList<T>::LinkedList() {
 
 template <typename T>
 LinkedList<T>::~LinkedList() {
-	if (count > 0) {							// Ensure that theres actually data in the LL
-		count = 0;
-		Node* curr = head;
-		while (curr && curr->next) {			// While the next pointer in the current node isn't null
-												// Also make sure the curr ptr isnt null if the LL was already cleared
-			curr = curr->next;					// Set current pointer to the next node
-			delete curr->prev;					// Delete the previous node of this node (i.e the og node)
-		}
-		delete curr;							// Delete the current pointer, should be the last one
-		head = nullptr;							// Set head and tail pointers to nullptr
-		tail = nullptr;							// No dangling pointers pls
-	}
+	this->clear();
 }
 
 // Copy Constructor
@@ -207,7 +196,6 @@ template <typename T>
 void LinkedList<T>::clear() {
 	while (count > 0) {					// While head and tail pointer are real
 		removeHead();						// Delete the head until nothing is left.
-		count--;
 	}
 }
 
