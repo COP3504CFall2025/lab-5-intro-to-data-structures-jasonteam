@@ -204,6 +204,7 @@ void LinkedList<T>::clear() {
 		removeHead();						// Delete the head until nothing is left.
 		removeTail();						// Delete the tail until nothing is left.
 		printForward();
+		std::cout << std::endl;
 	}
 }
 
