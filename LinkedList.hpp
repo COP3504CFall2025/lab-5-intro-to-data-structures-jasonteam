@@ -137,6 +137,7 @@ void LinkedList<T>::addHead(const T& data){
 		Node* tempPtr = new Node();			// Create new node
 		tempPtr->data = data;				// Set the data into the node
 		tempPtr->next = head;				// Set the next pointer node to the current head address
+		tempPtr->prev = nullptr;
 		head->prev = tempPtr;				// Set the previous pointer of the previous head to the new head
 		head = tempPtr;						// Set the head pointer to new head pointer
 	}
@@ -155,6 +156,7 @@ void LinkedList<T>::addTail(const T& data) {
 	} else {
 		Node* tempPtr = new Node();			// Create new node
 		tempPtr->data = data;				// Set the data into the node
+		tempPtr->next = nullptr;
 		tempPtr->prev = tail;				// Set the prev pointer node to the current tail address
 		tail->next = tempPtr;				// Set the next pointer of the previous tail to the new tail
 		tail = tempPtr;						// Set the tail pointer to new tail pointer
