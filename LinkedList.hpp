@@ -202,11 +202,10 @@ bool LinkedList<T>::removeTail() {
 
 template <typename T>
 void LinkedList<T>::clear() {
-	while (head || tail) {					// While head and tail pointer are real
+	while (removeHead()) {					// While head and tail pointer are real
 		std::cout << "current count : " << count << std::endl;
 		printForward();
 		std::cout << std::endl;
-		removeHead();						// Delete the head until nothing is left.
 	}
 }
 

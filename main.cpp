@@ -21,7 +21,13 @@
 int main() {
     LinkedList<int> a;
     
-    a.addTail(1);
+    for (int i = 0; i < 100; i++) {
+        a.addTail(i);
+    }
+    a.removeHead();
+    a.removeTail();
+    a.addHead(1);
+    
 
     return 0;
 }
