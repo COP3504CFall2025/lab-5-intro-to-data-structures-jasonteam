@@ -19,15 +19,8 @@
 */
 
 int main() {
-    LinkedList<int> a;
-    
-    for (int i = 0; i < 100; i++) {
-        a.addTail(i);
-    }
-    a.removeHead();
-    a.removeTail();
-    a.addHead(1);
-    
+
+
 
     return 0;
 }

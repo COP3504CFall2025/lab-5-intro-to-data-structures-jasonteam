@@ -82,7 +82,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 	if (this == &rhs) {
 		return *this;
 	}
-	this->count = 0;				// Set count to 0
+	this->clear();						// Clear current data
 	Node* curr = rhs.head;				// Current node pointer for the other object
 	while (curr) {
 		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
@@ -112,7 +112,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
 	if (this == &rhs) {
 		return *this;
 	}
-	this->count = 0;				// Set count to 0
+	this->clear();						// Clear current data
 	Node* curr = rhs.head;				// Current node pointer for the other object
 	while (curr) {
 		this->addTail(curr->data);			// Use addTail to add nodes to THIS LL
@@ -202,11 +202,7 @@ bool LinkedList<T>::removeTail() {
 
 template <typename T>
 void LinkedList<T>::clear() {
-	while (removeHead()) {					// While head and tail pointer are real
-		std::cout << "current count : " << count << std::endl;
-		printForward();
-		std::cout << std::endl;
-	}
+	while (removeHead()) {	}	// Remove head pointer until return false/fail/no more/done fr
 }
 
 template <typename T>
