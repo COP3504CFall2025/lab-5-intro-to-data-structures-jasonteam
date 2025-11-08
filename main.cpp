@@ -21,7 +21,7 @@
 int main() {
     LinkedList<int> a;
     
-    for (int i = 0; i < 99; i++) {
+    for (int i = 0; i < 98; i++) {
         a.addHead(i);
     }
 

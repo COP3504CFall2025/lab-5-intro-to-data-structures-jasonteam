@@ -202,6 +202,8 @@ template <typename T>
 void LinkedList<T>::clear() {
 	while (head || tail) {					// While head and tail pointer are real
 		removeHead();						// Delete the head until nothing is left.
+		removeTail();						// Delete the tail until nothing is left.
+		printForward();
 	}
 }
 
