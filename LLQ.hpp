@@ -39,7 +39,9 @@ void LLQ<T>::enqueue(const T& item) {
 
 template <typename T>
 T LLQ<T>::dequeue() {
-    return list.removeHead();
+    T tmp = list.getHead()->data;
+    list.removeHead();
+    return tmp;
 }
 
 template <typename T>

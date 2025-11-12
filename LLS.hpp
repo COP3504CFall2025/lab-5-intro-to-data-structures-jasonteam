@@ -38,7 +38,9 @@ void LLS<T>::push(const T& item) {
 
 template <typename T>
 T LLS<T>::pop() {
-    return list.removeHead();
+    T tmp = list.getHead()->data;
+    list.removeHead();
+    return tmp;
 }
 
 template <typename T>
