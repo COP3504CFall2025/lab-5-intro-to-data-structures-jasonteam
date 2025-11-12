@@ -132,6 +132,9 @@ void ABDQ<T>::shrinkIfNeeded() {
 
 template <typename T>
 void ABDQ<T>::pushFront(const T &item) {
+    if (size_ == capacity_) {
+        ensureCapacity();
+    }
     if (size_ == 0) {           // If the deque is empty
         data_[front_] = item;
         size_++;
@@ -147,6 +150,9 @@ void ABDQ<T>::pushFront(const T &item) {
 
 template <typename T>
 void ABDQ<T>::pushBack(const T &item) {
+    if (size_ == capacity_) {
+        ensureCapacity();
+    }
     if (size_ == 0) {           // If the deque is empty
         data_[back_] = item;
         size_++;
@@ -200,7 +206,7 @@ const T& ABDQ<T>::front() const {
 
 template <typename T>
 const T& ABDQ<T>::back() const {
-    if (front_ == back_) {
+    if (size_ == 0) {
         throw std::runtime_error("empty");
     }
     return data_[back_];
