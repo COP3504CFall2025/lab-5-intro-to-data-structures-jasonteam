@@ -22,7 +22,11 @@ int main() {
     ABDQ<int> a;
 
     for (int i = 0; i < 5; i++) {
-        a.pushFront(i);
+        a.pushBack(i);
+    }
+    a.printArray();
+    for (int i = 0; i < 2; i++) {
+        a.popFront();
     }
     a.printArray();
 

@@ -107,11 +107,12 @@ void ABDQ<T>::ensureCapacity() {
         tmpArr[i] = data_[front_ + i];                      // Recenter the queue back to zero. will this make my life harder? maybe lol
     }
     delete[] data_;
-    data_ = tmpArr;
+    data_ = std::move(tmpArr);
     tmpArr = nullptr;
 
     front_ = 0;
     back_ = size_ - 1;
+    capacity_ *= SCALE_FACTOR;
 }
 
 template <typename T>
