@@ -28,6 +28,11 @@ public:
 };
 
 template <typename T>
+LLQ<T>::LLQ() {
+
+}
+
+template <typename T>
 void LLQ<T>::enqueue(const T& item) {
     list.addTail(item);
 }
@@ -39,7 +44,7 @@ T LLQ<T>::dequeue() {
 
 template <typename T>
 T LLQ<T>::peek() const {
-    return list.getHead();
+    return list.getHead()->data;
 }
 
 template <typename T>

@@ -27,6 +27,11 @@ public:
 };
 
 template <typename T>
+LLS<T>::LLS() {
+
+}
+
+template <typename T>
 void LLS<T>::push(const T& item) {
     list.addHead(item);
 }
@@ -38,7 +43,7 @@ T LLS<T>::pop() {
 
 template <typename T>
 T LLS<T>::peek() const {
-    return list.getHead();
+    return list.getHead()->data;
 }
 
 template <typename T>
