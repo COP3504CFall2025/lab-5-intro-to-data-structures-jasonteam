@@ -20,6 +20,7 @@
 
 int main() {
     ABDQ<int> a;
+    ABDQ<int> b;
 
     for (int i = 0; i < 5; i++) {
         a.pushBack(i);
@@ -29,6 +30,9 @@ int main() {
         a.popFront();
     }
     a.printArray();
+
+    b = a;
+
 
     
 

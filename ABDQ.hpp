@@ -82,22 +82,70 @@ void ABDQ<T>::printArray() {
 
 template <typename T>                       // Copy Constructor
 ABDQ<T>::ABDQ(const ABDQ& other) {
-
+    this->front_ = other.front_;
+    this->back_ = other.back_;
+    this->size_ = other.size_;
+    this->capacity_ = other.capacity_;
+    this->data_ = new T[capacity_];
+    for (size_t i = 0; i < capacity_; i++) {
+        this->data_[i] = other.data_[i];
+    }
 }
 
 template <typename T>                       // Copy Assignment Operator
 ABDQ<T>& ABDQ<T>::operator=(const ABDQ& other) {
-
+    this->front_ = other.front_;
+    this->back_ = other.back_;
+    this->size_ = other.size_;
+    this->capacity_ = other.capacity_;
+    delete[] this->data_;
+    this->data_ = new T[capacity_];
+    for (size_t i = 0; i < capacity_; i++) {
+        this->data_[i] = other.data_[i];
+    }
+    return *this;
 }
 
 template <typename T>                       // Move Constructor
 ABDQ<T>::ABDQ(ABDQ&& other) noexcept {
-
+    this->front_ = other.front_;
+    this->back_ = other.back_;
+    this->size_ = other.size_;
+    this->capacity_ = other.capacity_;
+    this->data_ = new T[capacity_];
+    for (size_t i = 0; i < capacity_; i++) {
+        this->data_[i] = other.data_[i];
+    }
+    other.front_ = 0;
+    other.back_ = 0;
+    other.size_ = 0;
+    other.capacity_ = 0;
+    delete[] other.data_;
+    other.data_ = nullptr;
 }
 
 template <typename T>                       // Move Assignment Operator
 ABDQ<T>& ABDQ<T>::operator=(ABDQ&& other) noexcept {
+    if (this == &other) {
+        return *this;
+    }
+    this->front_ = other.front_;
+    this->back_ = other.back_;
+    this->size_ = other.size_;
+    this->capacity_ = other.capacity_;
+    delete[] this->data_;
+    this->data_ = new T[capacity_];
+    for (size_t i = 0; i < capacity_; i++) {
+        this->data_[i] = other.data_[i];
+    }
+    other.front_ = 0;
+    other.back_ = 0;
+    other.size_ = 0;
+    other.capacity_ = 0;
+    delete[] other.data_;
+    other.data_ = nullptr;
 
+    return *this;
 }
 
 template <typename T>
