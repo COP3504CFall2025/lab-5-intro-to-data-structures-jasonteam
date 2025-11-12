@@ -1,6 +1,6 @@
 #ifdef MAIN
 
-//#include "ABDQ.hpp"
+#include "ABDQ.hpp"
 #include "ABQ.hpp"
 #include "ABS.hpp"
 #include "Interfaces.hpp"
@@ -19,7 +19,14 @@
 */
 
 int main() {
+    ABDQ<int> a;
 
+    for (int i = 0; i < 5; i++) {
+        a.pushBack(i);
+    }
+    for (int i = 0; i < 10; i++) {
+        std::cout << a.popFront() << std::endl;
+    }
 
 
     return 0;

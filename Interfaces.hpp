@@ -27,12 +27,12 @@ public:
 template <typename T>
 class DequeInterface {
 public:
-    void pushFront(const T& item);
-    void pushBack(const T& item);
-    T popFront();
-    T popBack();
-    const T& front() const;
-    const T& back() const;
-    std::size_t getSize() const noexcept;
+    virtual void pushFront(const T& item) = 0;
+    virtual void pushBack(const T& item) = 0;
+    virtual T popFront() = 0;
+    virtual T popBack() = 0;
+    virtual const T& front() const = 0;
+    virtual const T& back() const = 0;
+    virtual std::size_t getSize() const noexcept = 0;
 };
 
