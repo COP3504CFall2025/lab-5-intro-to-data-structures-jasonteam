@@ -39,9 +39,6 @@ void LLQ<T>::enqueue(const T& item) {
 
 template <typename T>
 T LLQ<T>::dequeue() {
-    if (list.getCount() == 0) {
-        throw std::runtime_error("");
-    }
     T tmp = list.getHead()->data;
     list.removeHead();
     return tmp;
@@ -49,6 +46,9 @@ T LLQ<T>::dequeue() {
 
 template <typename T>
 T LLQ<T>::peek() const {
+    if (list.getCount() == 0) {
+        throw std::runtime_error("");
+    }
     return list.getHead()->data;
 }
 

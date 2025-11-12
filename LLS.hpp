@@ -38,9 +38,6 @@ void LLS<T>::push(const T& item) {
 
 template <typename T>
 T LLS<T>::pop() {
-    if (list.getCount() == 0) {
-        throw std::runtime_error("");
-    }
     T tmp = list.getHead()->data;
     list.removeHead();
     return tmp;
@@ -48,6 +45,9 @@ T LLS<T>::pop() {
 
 template <typename T>
 T LLS<T>::peek() const {
+    if (list.getCount() == 0) {
+        throw std::runtime_error("");
+    }
     return list.getHead()->data;
 }
 
