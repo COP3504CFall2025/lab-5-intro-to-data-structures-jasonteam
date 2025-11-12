@@ -22,11 +22,11 @@ int main() {
     ABDQ<int> a;
 
     for (int i = 0; i < 5; i++) {
-        a.pushBack(i);
+        a.pushFront(i);
     }
-    for (int i = 0; i < 10; i++) {
-        std::cout << a.popFront() << std::endl;
-    }
+    a.printArray();
+
+    
 
 
     return 0;

@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "Interfaces.hpp"
 #include <utility>
-
+#include <iostream>
 template <typename T>
 class ABDQ : public DequeInterface<T> {
 private:
@@ -44,6 +44,8 @@ public:
     // Capacity Setters
     void ensureCapacity();
     void shrinkIfNeeded();
+
+    void printArray();
 };
 
 template <typename T>
@@ -68,6 +70,14 @@ template <typename T>
 ABDQ<T>::~ABDQ() {
     delete[] data_;
     data_ = nullptr;
+}
+
+template <typename T>
+void ABDQ<T>::printArray() {
+    for (size_t i = 0; i < capacity_; i++) {
+        std::cout << data_[i] << " ";
+    }
+    std::cout << std::endl;
 }
 
 template <typename T>                       // Copy Constructor
@@ -122,25 +132,37 @@ void ABDQ<T>::shrinkIfNeeded() {
 
 template <typename T>
 void ABDQ<T>::pushFront(const T &item) {
+    if (size_ == 0) {           // If the deque is empty
+        data_[front_] = item;
+        size_++;
+        return;
+    }
     if (front_ == 0) {                   // If front of the deque is literally at the start of the array
         front_ = capacity_;          // Set front index to wrap around to the back of the array
     }
     front_--;
     data_[front_] = item;
+    size_++;
 }
 
 template <typename T>
 void ABDQ<T>::pushBack(const T &item) {
-    if (back_ == capacity_ - 1) {        // If back of deque is literally the end of the array
-        back_ = 0;                      // Set back index to wrap around to the start of the array
+    if (size_ == 0) {           // If the deque is empty
+        data_[back_] = item;
+        size_++;
+        return;
     }
-    data_[back_] = item;
+    if (back_ == capacity_ - 1) {        // If back of deque is literally the end of the array
+        back_ = -1;                      // Set back index to wrap around to the start of the array
+    }
     back_++;
+    data_[back_] = item;
+    size_++;
 }
 
 template <typename T>
 T ABDQ<T>::popFront() {
-    if (front_ == back_) {
+    if (size_ == 0) {
         throw std::runtime_error("empty");
     }
     T val = data_[front_];
@@ -148,12 +170,14 @@ T ABDQ<T>::popFront() {
         front_ = -1;
     }
     front_++;
+    size_--;
+    shrinkIfNeeded();
     return val;
 }
 
 template <typename T>
 T ABDQ<T>::popBack() {
-    if (front_ == back_) {
+    if (size_ == 0) {
         throw std::runtime_error("empty");
     }
     T val = data_[back_];
@@ -161,12 +185,14 @@ T ABDQ<T>::popBack() {
         back_ = capacity_;
     }
     back_--;
+    size_--;
+    shrinkIfNeeded();
     return val;
 }
 
 template <typename T>
 const T& ABDQ<T>::front() const {
-    if (front_ == back_) {
+    if (size_ == 0) {
         throw std::runtime_error("empty");
     }
     return data_[front_];
@@ -177,7 +203,7 @@ const T& ABDQ<T>::back() const {
     if (front_ == back_) {
         throw std::runtime_error("empty");
     }
-    return data_[back_ - 1];
+    return data_[back_];
 }
 
 template <typename T>
