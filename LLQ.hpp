@@ -26,3 +26,23 @@ public:
     std::size_t getSize() const noexcept override;
 
 };
+
+template <typename T>
+void LLQ<T>::enqueue(const T& item) {
+    list.addTail(item);
+}
+
+template <typename T>
+T LLQ<T>::dequeue() {
+    return list.removeHead();
+}
+
+template <typename T>
+T LLQ<T>::peek() const {
+    return list.getHead();
+}
+
+template <typename T>
+std::size_t LLQ<T>::getSize() const noexcept {
+    return list.getCount();
+}

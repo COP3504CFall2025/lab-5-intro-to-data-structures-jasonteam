@@ -19,22 +19,6 @@
 */
 
 int main() {
-    ABDQ<int> a;
-    ABDQ<int> b;
-
-    for (int i = 0; i < 5; i++) {
-        a.pushBack(i);
-    }
-    a.printArray();
-    for (int i = 0; i < 2; i++) {
-        a.popFront();
-    }
-    a.printArray();
-
-    b = a;
-
-
-    
 
 
     return 0;
