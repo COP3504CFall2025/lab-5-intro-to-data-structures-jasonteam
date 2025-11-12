@@ -102,7 +102,7 @@ ABDQ<T>& ABDQ<T>::operator=(ABDQ&& other) noexcept {
 
 template <typename T>
 void ABDQ<T>::ensureCapacity() {
-    T tmpArr = new T[capacity_ * SCALE_FACTOR];            // Scale capacity
+    T* tmpArr = new T[capacity_ * SCALE_FACTOR];            // Scale capacity
     for (size_t i = 0; i < size_; i++) {
         tmpArr[i] = data_[front_ + i];                      // Recenter the queue back to zero. will this make my life harder? maybe lol
     }
@@ -117,7 +117,7 @@ void ABDQ<T>::ensureCapacity() {
 template <typename T>
 void ABDQ<T>::shrinkIfNeeded() {
     if (size_ <= (capacity_ / SCALE_FACTOR) && (capacity_ % SCALE_FACTOR) == 0) { // Check if size is smaller than half the capacity and also check if capacity is even disvisible with no remainders
-        T tmpArr = new T[capacity_ / SCALE_FACTOR];
+        T* tmpArr = new T[capacity_ / SCALE_FACTOR];
         for (size_t i = 0; i < size_; i++) {
             tmpArr[i] = data_[front_ + i];                      // Recenter the queue back to zero. will this make my life harder? maybe lol
         }
