@@ -5,7 +5,7 @@
 #include "ABS.hpp"
 #include "Interfaces.hpp"
 #include "LinkedList.hpp"
-//#include "LLDQ.hpp"
+#include "LLDQ.hpp"
 #include "LLQ.hpp"
 #include "LLS.hpp"
 #include <iostream>
@@ -19,8 +19,7 @@
 */
 
 int main() {
-    LLQ<int> a;
-    LLS<int> b;
+    LLDQ<int> a;
 
     return 0;
 }
